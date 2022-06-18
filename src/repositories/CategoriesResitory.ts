@@ -17,7 +17,7 @@ class CategoriesRepository {
     const category = new Category();
 
     Object.assign(category, {
-      name,
+      name: name.toLocaleLowerCase(),
       description,
       created_at: new Date(),
     });
@@ -27,6 +27,14 @@ class CategoriesRepository {
 
   list() {
     return this.categories;
+  }
+
+  findByName(name: string) {
+    const category = this.categories.find(
+      category =>
+        category.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
+    );
+    return category;
   }
 }
 
